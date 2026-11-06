@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raízes & Saberes - Plataforma ERER</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; color: #0f172a;">
+    <script src="script.js"></script>
+
+    <!-- TELA DE AUTENTICAÇÃO (LOGIN E CADASTRO) -->
+    <section id="secao-login" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #5c2c16 0%, #0f172a 100%); padding: 1.5rem;">
+        <div style="background: #ffffff; width: 100%; max-width: 450px; padding: 2.5rem; border-radius: 20px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);">
+            
+            <div style="text-align: center; margin-bottom: 1.5rem;">
+                <img src="https://i.pinimg.com/736x/4f/82/52/4f82522ac124ff7135b1736ad8f27611.jpg" alt="Logo Raízes & Saberes" style="width: 55px; height: 55px; border-radius: 12px; margin-bottom: 0.5rem; object-fit: cover;">
+                <h2 style="font-size: 1.75rem; font-weight: 800; color: #5c2c16; margin: 0;">Raízes<span style="color: #d97724;">&</span>Saberes</h2>
+                <p style="font-size: 0.85rem; color: #64748b; margin-top: 4px;">Plataforma Educativa Étnico-Racial</p>
+            </div>
+
+            <!-- Abas para alternar entre Login e Cadastro -->
+            <div style="display: flex; background: #f1f5f9; border-radius: 10px; padding: 4px; margin-bottom: 1.5rem;">
+                <button id="aba-login" onclick="alternarAba('login')" style="flex: 1; border: none; padding: 10px; font-weight: 700; border-radius: 8px; background: #ffffff; color: #5c2c16; cursor: pointer;">Entrar</button>
+                <button id="aba-cadastro" onclick="alternarAba('cadastro')" style="flex: 1; border: none; padding: 10px; font-weight: 700; border-radius: 8px; background: transparent; color: #64748b; cursor: pointer;">Criar Conta</button>
+            </div>
+
+            <!-- Formulário de Login -->
+            <form id="form-login" onsubmit="event.preventDefault(); realizarLogin();">
+                <div style="margin-bottom: 1rem;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 4px;">E-mail</label>
+                    <input type="email" id="login-email" placeholder="seuemail@escola.com" required style="width: 100%; padding: 12px 14px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 0.95rem; box-sizing: border-box; outline: none;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 4px;">Senha</label>
+                    <input type="password" id="login-senha" placeholder="••••••••" required style="width: 100%; padding: 12px 14px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 0.95rem; box-sizing: border-box; outline: none;">
+                </div>
+
+                <button type="submit" style="width: 100%; background: #5c2c16; color: #ffffff; border: none; padding: 14px; font-size: 1rem; font-weight: 700; border-radius: 10px; cursor: pointer;">
+                    Entrar na Conta
+                </button>
+            </form>
+
+            <!-- Formulário de Cadastro -->
+            <form id="form-cadastro" onsubmit="event.preventDefault(); realizarCadastro();" style="display: none;">
+                <div style="margin-bottom: 0.8rem;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 4px;">Nome Completo</label>
+                    <input type="text" id="cad-nome" placeholder="Seu nome..." required style="width: 100%; padding: 10px 14px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 0.9rem; box-sizing: border-box; outline: none;">
+                </div>
+
+                <div style="margin-bottom: 0.8rem;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 4px;">Turma / Série</label>
+                    <input type="text" id="cad-turma" placeholder="Ex: 3º Ano B" required style="width: 100%; padding: 10px 14px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 0.9rem; box-sizing: border-box; outline: none;">
+                </div>
+
+                <div style="margin-bottom: 0.8rem;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 4px;">E-mail</label>
+                    <input type="email" id="cad-email" placeholder="seuemail@escola.com" required style="width: 100%; padding: 10px 14px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 0.9rem; box-sizing: border-box; outline: none;">
+                </div>
+
+                <div style="margin-bottom: 1.2rem;">
+                    <label style="display: block; font-size: 0.85rem; font-weight: 700; color: #334155; margin-bottom: 4px;">Senha de Acesso</label>
+                    <input type="password" id="cad-senha" placeholder="Crie uma senha..." required style="width: 100%; padding: 10px 14px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 0.9rem; box-sizing: border-box; outline: none;">
+                </div>
+
+                <button type="submit" style="width: 100%; background: #d97724; color: #ffffff; border: none; padding: 12px; font-size: 1rem; font-weight: 700; border-radius: 10px; cursor: pointer;">
+                    Criar Minha Conta
+                </button>
+            </form>
+
+            <div style="margin-top: 1.5rem; border-top: 1px solid #f1f5f9; padding-top: 1rem;">
+                <h4 style="font-size: 0.8rem; font-weight: 700; color: #64748b; text-transform: uppercase; margin: 0 0 8px 0;">Acessos Recentes</h4>
+                <div id="historico-login" style="display: flex; flex-direction: column; gap: 6px;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTEÚDO DA PLATAFORMA EM PÁGINAS -->
+    <div id="app-conteudo" style="display: none;">
+        
+        <!-- Menu Superior de Navegação -->
+        <header style="background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100;">
+            <div style="max-width: 1200px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <div style="display: flex; align-items: center; gap: 12px; cursor: pointer;" onclick="navegarPara('pagina-home', 'Início')">
+                    <img src="https://i.pinimg.com/736x/4f/82/52/4f82522ac124ff7135b1736ad8f27611.jpg" alt="Logo" style="width: 40px; height: 40px; border-radius: 8px; object-fit: cover;">
+                    <span style="font-size: 1.3rem; font-weight: 800; color: #5c2c16;">Raízes<span style="color: #d97724;">&</span>Saberes</span>
+                </div>
+
+                <nav>
+                    <ul style="list-style: none; display: flex; gap: 8px; margin: 0; padding: 0; align-items: center; flex-wrap: wrap;">
+                        <li><button class="btn-nav" onclick="navegarPara('pagina-biografias', 'Biografias')">Biografias</button></li>
+                        <li><button class="btn-nav" onclick="navegarPara('pagina-chat', 'Tutor IA')">🤖 Tutor IA</button></li>
+                        <li><button class="btn-nav" onclick="navegarPara('pagina-quiz', 'Quiz IA')">🎯 Quiz IA</button></li>
+                        <li><button class="btn-nav" onclick="navegarPara('pagina-glossario', 'Glossário')">Glossário</button></li>
+                        <li><button class="btn-nav" onclick="navegarPara('pagina-historico', 'Histórico de Navegação')" style="color: #d97724;">📜 Histórico</button></li>
+                    </ul>
+                </nav>
+
+                <div style="display: flex; align-items: center; gap: 10px; background: #f1f5f9; padding: 6px 14px; border-radius: 20px;">
+                    <span id="label-usuario" style="font-weight: 700; font-size: 0.85rem; color: #334155;">Estudante</span>
+                    <button onclick="logout()" style="background: transparent; border: none; color: #ef4444; font-weight: 700; cursor: pointer; font-size: 0.8rem;">Sair</button>
+                </div>
+            </div>
+        </header>
+
+        <main style="max-width: 1200px; margin: 0 auto; padding: 2rem 1.5rem; min-height: 75vh;">
+
+            <!-- PÁGINA 1: HOME -->
+            <div id="pagina-home" class="pagina">
+                <div style="background: linear-gradient(135deg, #5c2c16 0%, #d97724 100%); color: #ffffff; padding: 3.5rem 2rem; border-radius: 24px; text-align: center; margin-bottom: 2rem;">
+                    <h1 style="font-size: 2.4rem; font-weight: 800; margin: 0 0 1rem 0;">Bem-vindo ao Raízes & Saberes</h1>
+                    <p style="font-size: 1.1rem; max-width: 700px; margin: 0 auto 2rem auto; opacity: 0.9;">Plataforma de valorização da história, cultura e protagonismo dos povos negros e originários do Brasil.</p>
+                    
+                    <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                        <button onclick="navegarPara('pagina-biografias', 'Biografias')" style="background: #ffffff; color: #5c2c16; border: none; padding: 12px 24px; border-radius: 10px; font-weight: 700; cursor: pointer;">Explorar Biografias</button>
+                        <button onclick="navegarPara('pagina-chat', 'Tutor IA')" style="background: rgba(255,255,255,0.2); color: #ffffff; border: 1px solid #ffffff; padding: 12px 24px; border-radius: 10px; font-weight: 700; cursor: pointer;">Conversar com Tutor IA</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 2: LISTA DE BIOGRAFIAS -->
+            <div id="pagina-biografias" class="pagina" style="display: none;">
+                <h2 style="font-size: 1.8rem; font-weight: 800; color: #0f172a; margin-bottom: 0.5rem;">Eixo A — Biografias & Protagonismo</h2>
+                <p style="color: #64748b; margin-bottom: 1.5rem;">Clique em qualquer card abaixo para abrir o estudo detalhado da personalidade:</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    <!-- Dandara -->
+                    <article onclick="abrirDetalheBiografia('dandara')" style="background: #ffffff; border-radius: 16px; padding: 1.5rem; border: 1px solid #e2e8f0; text-align: center; cursor: pointer;">
+                        <img src="https://i.pinimg.com/1200x/64/a4/9e/64a49e679df946238eb9af9d2611df60.jpg" alt="Dandara" style="width: 90px; height: 90px; border-radius: 50%; margin-bottom: 1rem; object-fit: cover;">
+                        <h3 style="margin: 0; color: #5c2c16;">Dandara dos Palmares</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Liderança do Quilombo dos Palmares e referência na resistência antiescravista.</p>
+                    </article>
+
+                    <!-- Ailton Krenak -->
+                    <article onclick="abrirDetalheBiografia('krenak')" style="background: #ffffff; border-radius: 16px; padding: 1.5rem; border: 1px solid #e2e8f0; text-align: center; cursor: pointer;">
+                        <img src="https://i.pinimg.com/1200x/f1/a7/1f/f1a71f6ed1b35f6cb1b433445e467058.jpg" alt="Ailton Krenak" style="width: 90px; height: 90px; border-radius: 50%; margin-bottom: 1rem; object-fit: cover;">
+                        <h3 style="margin: 0; color: #2e5a44;">Ailton Krenak</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Líder indígena, filósofo, ambientalista e imortal da Academia Brasileira de Letras.</p>
+                    </article>
+
+                    <!-- Sueli Carneiro -->
+                    <article onclick="abrirDetalheBiografia('sueli')" style="background: #ffffff; border-radius: 16px; padding: 1.5rem; border: 1px solid #e2e8f0; text-align: center; cursor: pointer;">
+                        <img src="https://i.pinimg.com/736x/8d/3a/b4/8d3ab48c2e50b79fe8e1a9e09c6a2790.jpg" alt="Sueli Carneiro" style="width: 90px; height: 90px; border-radius: 50%; margin-bottom: 1rem; object-fit: cover;">
+                        <h3 style="margin: 0; color: #d97724;">Sueli Carneiro</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Filósofa, escritora e referência do feminismo negro no Brasil.</p>
+                    </article>
+
+                    <!-- Machado de Assis -->
+                    <article onclick="abrirDetalheBiografia('machado')" style="background: #ffffff; border-radius: 16px; padding: 1.5rem; border: 1px solid #e2e8f0; text-align: center; cursor: pointer;">
+                        <img src="https://i.pinimg.com/736x/f2/0a/9f/f20a9f53cbf7a9cf82584e6b6fe04d8e.jpg" alt="Machado de Assis" style="width: 90px; height: 90px; border-radius: 50%; margin-bottom: 1rem; object-fit: cover;">
+                        <h3 style="margin: 0; color: #5c2c16;">Machado de Assis</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Maior nome da literatura brasileira e fundador da ABL.</p>
+                    </article>
+
+                    <!-- Zumbi dos Palmares -->
+                    <article onclick="abrirDetalheBiografia('zumbi')" style="background: #ffffff; border-radius: 16px; padding: 1.5rem; border: 1px solid #e2e8f0; text-align: center; cursor: pointer;">
+                        <img src="https://i.pinimg.com/1200x/59/35/80/593580979b1b3b9bc3c240ef4b568ed7.jpg" alt="Zumbi dos Palmares" style="width: 90px; height: 90px; border-radius: 50%; margin-bottom: 1rem; object-fit: cover;">
+                        <h3 style="margin: 0; color: #5c2c16;">Zumbi dos Palmares</h3>
+                        <p style="font-size: 0.9rem; color: #64748b;">Último líder do Quilombo dos Palmares e símbolo da Consciência Negra.</p>
+                    </article>
+                </div>
+            </div>
+
+            <!-- PÁGINA 3: DETALHE EXTENSO DA BIOGRAFIA -->
+            <div id="pagina-detalhe-biografia" class="pagina" style="display: none;">
+                <button onclick="navegarPara('pagina-biografias', 'Biografias')" style="background: #f1f5f9; border: 1px solid #cbd5e1; color: #334155; padding: 8px 16px; border-radius: 8px; font-weight: 700; cursor: pointer; margin-bottom: 1.5rem;">
+                    ← Voltar para Biografias
+                </button>
+
+                <div style="background: #ffffff; border-radius: 20px; border: 1px solid #e2e8f0; padding: 2.5rem;">
+                    <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                        <img id="bio-foto" src="" alt="" style="width: 130px; height: 130px; border-radius: 50%; object-fit: cover; border: 4px solid #5c2c16;">
+                        <div>
+                            <h2 id="bio-nome" style="font-size: 2.2rem; font-weight: 800; color: #5c2c16; margin: 0;"></h2>
+                            <p id="bio-subtitulo" style="font-size: 1.15rem; color: #d97724; font-weight: 600; margin: 4px 0 0 0;"></p>
+                        </div>
+                    </div>
+                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin-bottom: 1.5rem;">
+                    <div id="bio-texto" style="font-size: 1rem; color: #334155; line-height: 1.8;"></div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 4: CHAT COM A IA -->
+            <div id="pagina-chat" class="pagina" style="display: none;">
+                <div style="background: #ffffff; border-radius: 20px; border: 1px solid #e2e8f0; padding: 2rem;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 1.5rem;">
+                        <div style="background: #fef3c7; padding: 10px; border-radius: 12px; font-size: 1.5rem;">🤖</div>
+                        <div>
+                            <h2 style="font-size: 1.5rem; font-weight: 800; margin: 0; color: #0f172a;">Tutor IA Antirracista (Respostas Detalhadas)</h2>
+                            <p style="margin: 0; font-size: 0.9rem; color: #64748b;">Tire dúvidas com explicações extensas sobre história, racismo estrutural e cultura.</p>
+                        </div>
+                    </div>
+
+                    <div id="caixa-chat" style="height: 380px; overflow-y: auto; background: #f8fafc; border-radius: 12px; padding: 1rem; border: 1px solid #e2e8f0; display: flex; flex-direction: column; gap: 12px; margin-bottom: 1rem;">
+                        <div style="background: #e2e8f0; color: #0f172a; padding: 12px 16px; border-radius: 12px; max-width: 85%; align-self: flex-start; font-size: 0.95rem; line-height: 1.6;">
+                            Olá! Sou o assistente de Educação Étnico-Racial. Pergunte sobre qualquer conceito, autor ou período histórico para obter análises detalhadas!
+                        </div>
+                    </div>
+
+                    <form id="form-chat" onsubmit="event.preventDefault(); enviarMensagemIA();" style="display: flex; gap: 10px;">
+                        <input type="text" id="mensagem-usuario" placeholder="Escreva sua dúvida em detalhes..." style="flex: 1; padding: 12px 16px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 0.95rem; outline: none;">
+                        <button type="submit" style="background: #5c2c16; color: #ffffff; border: none; padding: 0 24px; font-weight: 700; border-radius: 10px; cursor: pointer;">Enviar</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- PÁGINA 5: QUIZ DE IA -->
+            <div id="pagina-quiz" class="pagina" style="display: none;">
+                <div style="background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); border-radius: 20px; padding: 2rem; color: #ffffff;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 1.5rem;">
+                        <div>
+                            <span style="background: rgba(217, 119, 36, 0.2); color: #d97724; font-weight: 700; font-size: 0.8rem; padding: 4px 10px; border-radius: 20px; text-transform: uppercase;">Prática Gamificada</span>
+                            <h2 style="font-size: 1.6rem; font-weight: 800; margin: 6px 0 0 0;">Gerador de Quiz IA</h2>
+                        </div>
+                        <button onclick="gerarPerguntaIA()" style="background: #d97724; color: #ffffff; border: none; padding: 12px 20px; font-weight: 700; border-radius: 10px; cursor: pointer;">
+                            ✨ Gerar Pergunta
+                        </button>
+                    </div>
+
+                    <div id="area-quiz" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; padding: 1.5rem;">
+                        <p style="font-size: 1.1rem; font-weight: 600; margin-top: 0;" id="quiz-pergunta">
+                            Clique no botão acima para a IA sortear uma questão com explicação detalhada!
+                        </p>
+                        <div id="quiz-opcoes" style="display: flex; flex-direction: column; gap: 10px; margin-top: 1rem;"></div>
+                        <div id="quiz-feedback" style="margin-top: 1rem; padding: 1rem; border-radius: 8px; display: none; line-height: 1.6;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 6: GLOSSÁRIO ANTIRRACISTA -->
+            <div id="pagina-glossario" class="pagina" style="display: none;">
+                <div style="background: #ffffff; border-radius: 16px; padding: 2rem; border: 1px solid #e2e8f0;">
+                    <h2 style="font-size: 1.5rem; font-weight: 800; color: #5c2c16; margin-top: 0;">Glossário Antirracista Interativo</h2>
+                    <input type="text" id="campoBusca" placeholder="Pesquisar termo..." style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1rem; box-sizing: border-box;">
+                    <div id="listaGlossario"></div>
+                </div>
+            </div>
+
+            <!-- PÁGINA 7: HISTÓRICO DE NAVEGAÇÃO / SEÇÕES ANTIGAS -->
+            <div id="pagina-historico" class="pagina" style="display: none;">
+                <div style="background: #ffffff; border-radius: 16px; padding: 2rem; border: 1px solid #e2e8f0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <h2 style="font-size: 1.5rem; font-weight: 800; color: #5c2c16; margin: 0;">📜 Histórico de Navegação e Seções Acessadas</h2>
+                        <button onclick="limparHistoricoNavegacao()" style="background: #ef4444; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 0.8rem;">Limpar Histórico</button>
+                    </div>
+                    <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 1.5rem;">Clique em qualquer item abaixo para voltar diretamente para a seção acessada anteriormente:</p>
+
+                    <div id="lista-historico-navegacao" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                </div>
+            </div>
+
+        </main>
+
+        <footer style="background: #0f172a; color: #94a3b8; text-align: center; padding: 2rem 1rem;">
+            <p style="margin: 0; font-weight: 600; color: #ffffff;">Desenvolvido por: Aluno 1 | Aluno 2 | Aluno 3</p>
+            <p style="margin-top: 6px; font-size: 0.85rem;">Projeto ERER &copy; 2026 — Plataforma Educativa</p>
+        </footer>
+    </div>
+
+    <style>
+        .btn-nav {
+            background: transparent;
+            border: none;
+            color: #475569;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .btn-nav:hover {
+            background: #f1f5f9;
+            color: #5c2c16;
+        }
+    </style>
+
+    <script src="script.js"></script>
+</body>
+</html>
